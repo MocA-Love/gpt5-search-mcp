@@ -8,7 +8,7 @@
 </div>
 
 
-OpenAIのo3モデルとその強力なWeb検索機能を使えるようにするMCPサーバー。  
+OpenRouter経由でo3モデルとその強力なWeb検索機能を使えるようにするMCPサーバー。  
 任意のAIコーディングエージェントに登録することで、コーディングエージェントが自律的にo3モデルと相談し、複雑な問題を解決できるようになります。
 
 <table>
@@ -71,11 +71,11 @@ Claude Code:
 ```sh
 $ claude mcp add o3 \
 	-s user \  # この行を抜くと project scope でインストールされます
-	-e OPENAI_API_KEY=your-api-key \
+	-e OPENROUTER_API_KEY=your-api-key \
 	-e SEARCH_CONTEXT_SIZE=medium \
 	-e REASONING_EFFORT=medium \
-	-e OPENAI_API_TIMEOUT=60000 \
-	-e OPENAI_MAX_RETRIES=3 \
+	-e OPENROUTER_API_TIMEOUT=60000 \
+	-e OPENROUTER_MAX_RETRIES=3 \
 	-- npx o3-search-mcp
 ```
 
@@ -88,14 +88,14 @@ json:
       "command": "npx",
       "args": ["o3-search-mcp"],
       "env": {
-        "OPENAI_API_KEY": "your-api-key",
+        "OPENROUTER_API_KEY": "your-api-key",
         // オプション: low, medium, high (デフォルト: medium)
         "SEARCH_CONTEXT_SIZE": "medium",
         "REASONING_EFFORT": "medium",
         // オプション: ミリ秒単位のAPIタイムアウト (デフォルト: 60000)
-        "OPENAI_API_TIMEOUT": "60000",
+        "OPENROUTER_API_TIMEOUT": "60000",
         // オプション: 最大リトライ回数 (デフォルト: 3)
-        "OPENAI_MAX_RETRIES": "3"
+        "OPENROUTER_MAX_RETRIES": "3"
       }
     }
   }
@@ -118,11 +118,11 @@ Claude Code:
 ```sh
 $ claude mcp add o3 \
 	-s user \  # この行を抜くと project scope でインストールされます
-	-e OPENAI_API_KEY=your-api-key \
+	-e OPENROUTER_API_KEY=your-api-key \
 	-e SEARCH_CONTEXT_SIZE=medium \
 	-e REASONING_EFFORT=medium \
-	-e OPENAI_API_TIMEOUT=60000 \
-	-e OPENAI_MAX_RETRIES=3 \
+	-e OPENROUTER_API_TIMEOUT=60000 \
+	-e OPENROUTER_MAX_RETRIES=3 \
 	-- node /path/to/o3-search-mcp/build/index.js
 ```
 
@@ -135,14 +135,14 @@ json:
       "command": "node",
       "args": ["/path/to/o3-search-mcp/build/index.js"],
       "env": {
-        "OPENAI_API_KEY": "your-api-key",
+        "OPENROUTER_API_KEY": "your-api-key",
         // オプション: low, medium, high (デフォルト: medium)
         "SEARCH_CONTEXT_SIZE": "medium",
         "REASONING_EFFORT": "medium",
         // オプション: ミリ秒単位のAPIタイムアウト (デフォルト: 60000)
-        "OPENAI_API_TIMEOUT": "60000",
+        "OPENROUTER_API_TIMEOUT": "60000",
         // オプション: 最大リトライ回数 (デフォルト: 3)
-        "OPENAI_MAX_RETRIES": "3"
+        "OPENROUTER_MAX_RETRIES": "3"
       }
     }
   }
@@ -153,14 +153,14 @@ json:
 
 | 環境変数名 | オプション | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `OPENAI_API_KEY` | 必須 | - | OpenAI API Key |
+| `OPENROUTER_API_KEY` | 必須 | - | OpenRouter API Key |
+| `OPENROUTER_MODEL` | 任意 | `deepseek/r1` | クエリに使用するモデル |
+| `OPENROUTER_BASE_URL` | 任意 | `https://openrouter.ai/api/v1` | OpenRouter APIベースURL |
 | `SEARCH_CONTEXT_SIZE` | 任意 | `medium` | 検索コンテキストサイズを制御<br>値: `low`, `medium`, `high` |
 | `REASONING_EFFORT` | 任意 | `medium` | 推論努力レベルを制御<br>値: `low`, `medium`, `high` |
-| `OPENAI_API_TIMEOUT` | 任意 | `60000` | ミリ秒単位のAPIリクエストタイムアウト<br>例: `120000` で2分 |
-| `OPENAI_MAX_RETRIES` | 任意 | `3` | 失敗したリクエストの最大リトライ回数<br>SDKはレート制限（429）、サーバーエラー（5xx）、接続エラーで自動的にリトライします |
+| `OPENROUTER_API_TIMEOUT` | 任意 | `60000` | ミリ秒単位のAPIリクエストタイムアウト<br>例: `120000` で2分 |
+| `OPENROUTER_MAX_RETRIES` | 任意 | `3` | 失敗したリクエストの最大リトライ回数<br>SDKはレート制限（429）、サーバーエラー（5xx）、接続エラーで自動的にリトライします |
 
 ## 注意点
 
-OpenAI APIからo3 modelを利用可能にするためには、Tierを4まで上げるか、Organizationの検証をおこなう必要があります。  
-まだ利用可能でないAPI KeyをこのMCPに登録した場合、呼び出しでエラーになります。  
-参考: https://help.openai.com/en/articles/10362446-api-access-to-o1-o3-and-o4-models
+このMCPサーバーはOpenRouterを使用してo3モデルにアクセスします。有効なOpenRouter APIキーと十分なクレジットがあることを確認してください。

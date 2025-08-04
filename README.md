@@ -8,7 +8,7 @@
 </div>
 
 
-MCP server that enables the use of OpenAI's o3 model and its powerful web search capabilities.
+MCP server that enables the use of the o3 model and its powerful web search capabilities through OpenRouter.
 By registering it with any AI coding agent, the agent can autonomously consult with the o3 model to solve complex problems.
 
 <table>
@@ -72,11 +72,11 @@ Claude Code:
 ```sh
 $ claude mcp add o3 \
 	-s user \  # If you omit this line, it will be installed in the project scope
-	-e OPENAI_API_KEY=your-api-key \
+	-e OPENROUTER_API_KEY=your-api-key \
 	-e SEARCH_CONTEXT_SIZE=medium \
 	-e REASONING_EFFORT=medium \
-	-e OPENAI_API_TIMEOUT=60000 \
-	-e OPENAI_MAX_RETRIES=3 \
+	-e OPENROUTER_API_TIMEOUT=60000 \
+	-e OPENROUTER_MAX_RETRIES=3 \
 	-- npx o3-search-mcp
 ```
 
@@ -89,14 +89,14 @@ json:
       "command": "npx",
       "args": ["o3-search-mcp"],
       "env": {
-        "OPENAI_API_KEY": "your-api-key",
+        "OPENROUTER_API_KEY": "your-api-key",
         // Optional: low, medium, high (default: medium)
         "SEARCH_CONTEXT_SIZE": "medium",
         "REASONING_EFFORT": "medium",
         // Optional: API timeout in milliseconds (default: 60000)
-        "OPENAI_API_TIMEOUT": "60000",
+        "OPENROUTER_API_TIMEOUT": "60000",
         // Optional: Maximum number of retries (default: 3)
-        "OPENAI_MAX_RETRIES": "3"
+        "OPENROUTER_MAX_RETRIES": "3"
       }
     }
   }
@@ -119,11 +119,11 @@ Claude Code:
 ```sh
 $ claude mcp add o3 \
 	-s user \  # If you omit this line, it will be installed in the project scope
-	-e OPENAI_API_KEY=your-api-key \
+	-e OPENROUTER_API_KEY=your-api-key \
 	-e SEARCH_CONTEXT_SIZE=medium \
 	-e REASONING_EFFORT=medium \
-	-e OPENAI_API_TIMEOUT=60000 \
-	-e OPENAI_MAX_RETRIES=3 \
+	-e OPENROUTER_API_TIMEOUT=60000 \
+	-e OPENROUTER_MAX_RETRIES=3 \
 	-- node /path/to/o3-search-mcp/build/index.js
 ```
 
@@ -136,14 +136,14 @@ json:
       "command": "node",
       "args": ["/path/to/o3-search-mcp/build/index.js"],
       "env": {
-        "OPENAI_API_KEY": "your-api-key",
+        "OPENROUTER_API_KEY": "your-api-key",
         // Optional: low, medium, high (default: medium)
         "SEARCH_CONTEXT_SIZE": "medium",
         "REASONING_EFFORT": "medium",
         // Optional: API timeout in milliseconds (default: 60000)
-        "OPENAI_API_TIMEOUT": "60000",
+        "OPENROUTER_API_TIMEOUT": "60000",
         // Optional: Maximum number of retries (default: 3)
-        "OPENAI_MAX_RETRIES": "3"
+        "OPENROUTER_MAX_RETRIES": "3"
       }
     }
   }
@@ -154,14 +154,14 @@ json:
 
 | Environment Variable | Options | Default | Description |
 | --- | --- | --- | --- |
-| `OPENAI_API_KEY` | Required | - | OpenAI API Key |
+| `OPENROUTER_API_KEY` | Required | - | OpenRouter API Key |
+| `OPENROUTER_MODEL` | Optional | `deepseek/r1` | Model to use for queries |
+| `OPENROUTER_BASE_URL` | Optional | `https://openrouter.ai/api/v1` | OpenRouter API base URL |
 | `SEARCH_CONTEXT_SIZE` | Optional | `medium` | Controls the search context size<br>Values: `low`, `medium`, `high` |
 | `REASONING_EFFORT` | Optional | `medium` | Controls the reasoning effort level<br>Values: `low`, `medium`, `high` |
-| `OPENAI_API_TIMEOUT` | Optional | `60000` | API request timeout in milliseconds<br>Example: `120000` for 2 minutes |
-| `OPENAI_MAX_RETRIES` | Optional | `3` | Maximum number of retries for failed requests<br>The SDK automatically retries on rate limits (429), server errors (5xx), and connection errors |
+| `OPENROUTER_API_TIMEOUT` | Optional | `60000` | API request timeout in milliseconds<br>Example: `120000` for 2 minutes |
+| `OPENROUTER_MAX_RETRIES` | Optional | `3` | Maximum number of retries for failed requests<br>The SDK automatically retries on rate limits (429), server errors (5xx), and connection errors |
 
 ## Notes
 
-To use the o3 model from the OpenAI API, you need to either raise your tier to 4 or verify your organization.
-If you register an API key that is not yet enabled for o3 with this MCP, calls will result in an error.
-Reference: https://help.openai.com/en/articles/10362446-api-access-to-o1-o3-and-o4-models
+This MCP server uses OpenRouter to access the o3 model. Ensure you have a valid OpenRouter API key with sufficient credits.

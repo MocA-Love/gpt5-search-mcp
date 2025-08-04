@@ -8,7 +8,7 @@
 </div>
 
 
-一个MCP服务器，可以使用OpenAI的o3模型及其强大的Web搜索功能。
+一个MCP服务器，通过OpenRouter使用o3模型及其强大的Web搜索功能。
 通过将其注册到任何AI编码代理，该代理可以自主地与o3模型协商，以解决复杂的问题。
 
 <table>
@@ -71,11 +71,11 @@ Claude Code:
 ```sh
 $ claude mcp add o3 \
 	-s user \  # 省略此行将在项目范围内安装
-	-e OPENAI_API_KEY=your-api-key \
+	-e OPENROUTER_API_KEY=your-api-key \
 	-e SEARCH_CONTEXT_SIZE=medium \
 	-e REASONING_EFFORT=medium \
-	-e OPENAI_API_TIMEOUT=60000 \
-	-e OPENAI_MAX_RETRIES=3 \
+	-e OPENROUTER_API_TIMEOUT=60000 \
+	-e OPENROUTER_MAX_RETRIES=3 \
 	-- npx o3-search-mcp
 ```
 
@@ -88,14 +88,14 @@ json:
       "command": "npx",
       "args": ["o3-search-mcp"],
       "env": {
-        "OPENAI_API_KEY": "your-api-key",
+        "OPENROUTER_API_KEY": "your-api-key",
         // 可选: low, medium, high (默认: medium)
         "SEARCH_CONTEXT_SIZE": "medium",
         "REASONING_EFFORT": "medium",
         // 可选: API超时（毫秒） (默认: 60000)
-        "OPENAI_API_TIMEOUT": "60000",
+        "OPENROUTER_API_TIMEOUT": "60000",
         // 可选: 最大重试次数 (默认: 3)
-        "OPENAI_MAX_RETRIES": "3"
+        "OPENROUTER_MAX_RETRIES": "3"
       }
     }
   }
@@ -118,11 +118,11 @@ Claude Code:
 ```sh
 $ claude mcp add o3 \
 	-s user \  # 省略此行将在项目范围内安装
-	-e OPENAI_API_KEY=your-api-key \
+	-e OPENROUTER_API_KEY=your-api-key \
 	-e SEARCH_CONTEXT_SIZE=medium \
 	-e REASONING_EFFORT=medium \
-	-e OPENAI_API_TIMEOUT=60000 \
-	-e OPENAI_MAX_RETRIES=3 \
+	-e OPENROUTER_API_TIMEOUT=60000 \
+	-e OPENROUTER_MAX_RETRIES=3 \
 	-- node /path/to/o3-search-mcp/build/index.js
 ```
 
@@ -135,14 +135,14 @@ json:
       "command": "node",
       "args": ["/path/to/o3-search-mcp/build/index.js"],
       "env": {
-        "OPENAI_API_KEY": "your-api-key",
+        "OPENROUTER_API_KEY": "your-api-key",
         // 可选: low, medium, high (默认: medium)
         "SEARCH_CONTEXT_SIZE": "medium",
         "REASONING_EFFORT": "medium",
         // 可选: API超时（毫秒） (默认: 60000)
-        "OPENAI_API_TIMEOUT": "60000",
+        "OPENROUTER_API_TIMEOUT": "60000",
         // 可选: 最大重试次数 (默认: 3)
-        "OPENAI_MAX_RETRIES": "3"
+        "OPENROUTER_MAX_RETRIES": "3"
       }
     }
   }
@@ -153,14 +153,14 @@ json:
 
 | 环境变量名 | 选项 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `OPENAI_API_KEY` | 必需 | - | OpenAI API 密钥 |
+| `OPENROUTER_API_KEY` | 必需 | - | OpenRouter API 密钥 |
+| `OPENROUTER_MODEL` | 可选 | `deepseek/r1` | 用于查询的模型 |
+| `OPENROUTER_BASE_URL` | 可选 | `https://openrouter.ai/api/v1` | OpenRouter API基础URL |
 | `SEARCH_CONTEXT_SIZE` | 可选 | `medium` | 控制搜索上下文大小<br>值: `low`, `medium`, `high` |
 | `REASONING_EFFORT` | 可选 | `medium` | 控制推理努力级别<br>值: `low`, `medium`, `high` |
-| `OPENAI_API_TIMEOUT` | 可选 | `60000` | API请求超时（毫秒）<br>示例: `120000` 为2分钟 |
-| `OPENAI_MAX_RETRIES` | 可选 | `3` | 失败请求的最大重试次数<br>SDK会在速率限制（429）、服务器错误（5xx）和连接错误时自动重试 |
+| `OPENROUTER_API_TIMEOUT` | 可选 | `60000` | API请求超时（毫秒）<br>示例: `120000` 为2分钟 |
+| `OPENROUTER_MAX_RETRIES` | 可选 | `3` | 失败请求的最大重试次数<br>SDK会在速率限制（429）、服务器错误（5xx）和连接错误时自动重试 |
 
 ## 注意事项
 
-要从OpenAI API使用o3模型，您需要将您的层级提升到4级或验证您的组织。
-如果您向此MCP注册了尚未启用o3的API密钥，则调用将导致错误。
-参考: https://help.openai.com/en/articles/10362446-api-access-to-o1-o3-and-o4-models
+此MCP服务器使用OpenRouter访问o3模型。请确保您拥有有效的OpenRouter API密钥和足够的信用额度。
