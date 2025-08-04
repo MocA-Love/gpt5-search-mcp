@@ -12,9 +12,9 @@ const server = new McpServer({
 
 // Configuration from environment variables
 const config = {
-  apiKey: process.env.OPENAI_API_KEY,
-  maxRetries: parseInt(process.env.OPENAI_MAX_RETRIES || "3"),
-  timeout: parseInt(process.env.OPENAI_API_TIMEOUT || "60000"),
+  apiKey: process.env.OPENROUTER_API_KEY,
+  maxRetries: parseInt(process.env.OPENROUTER_MAX_RETRIES || "3"),
+  timeout: parseInt(process.env.OPENROUTER_API_TIMEOUT || "60000"),
   searchContextSize: (process.env.SEARCH_CONTEXT_SIZE || "medium") as
     | "low"
     | "medium"
@@ -25,8 +25,9 @@ const config = {
     | "high",
 };
 
-// Initialize OpenAI client with retry and timeout configuration
+// Initialize OpenAI client with OpenRouter configuration
 const openai = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
   apiKey: config.apiKey,
   maxRetries: config.maxRetries,
   timeout: config.timeout,
@@ -45,30 +46,26 @@ server.tool(
   },
   async ({ input }) => {
     try {
-      const response = await openai.responses.create({
-        model: "o3",
-        input,
-        tools: [
+      const response = await openai.chat.completions.create({
+        model: "openrouter/horizon-beta",
+        messages: [
           {
-            type: "web_search_preview",
-            search_context_size: config.searchContextSize,
+            role: "user",
+            content: input,
           },
         ],
-        tool_choice: "auto",
-        parallel_tool_calls: true,
-        reasoning: { effort: config.reasoningEffort },
       });
 
       return {
         content: [
           {
             type: "text",
-            text: response.output_text || "No response text available.",
+            text: response.choices[0]?.message?.content || "No response text available.",
           },
         ],
       };
     } catch (error) {
-      console.error("Error calling OpenAI API:", error);
+      console.error("Error calling OpenRouter API:", error);
       return {
         content: [
           {
