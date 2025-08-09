@@ -1,4 +1,4 @@
-# o3-search-mcp
+# gpt5-search-mcp.
 
 <div align="center">
   <p><a href="./README.md">English</a> | 日本語 | <a href="./README.zh.md">简体中文</a> | <a href="./README.ko.md">한국어</a></p>
@@ -8,19 +8,19 @@
 </div>
 
 
-OpenRouter経由でo3モデルとその強力なWeb検索機能を使えるようにするMCPサーバー。  
-任意のAIコーディングエージェントに登録することで、コーディングエージェントが自律的にo3モデルと相談し、複雑な問題を解決できるようになります。
+OpenAI経由でGPT-5モデルとその強力なWeb検索機能を使えるようにするMCPサーバー。  
+任意のAIコーディングエージェントに登録することで、コーディングエージェントが自律的にGPT-5モデルと相談し、複雑な問題を解決できるようになります。
 
 <table>
 	<tr>
 		<td width="50%">
-			<a href="https://mseep.ai/app/yoshiko-pg-o3-search-mcp">
-<img src="https://mseep.net/pr/yoshiko-pg-o3-search-mcp-badge.png" alt="MseeP.ai Security Assessment Badge" />
+			<a href="https://mseep.ai/app/MocA-Love-gpt5-search-mcp.">
+<img src="https://mseep.net/pr/MocA-Love-gpt5-search-mcp.-badge.png" alt="MseeP.ai Security Assessment Badge" />
 </a>
 		</td>
 		<td width="50%">
-			<a href="https://glama.ai/mcp/servers/@yoshiko-pg/o3-search-mcp">
-  <img src="https://glama.ai/mcp/servers/@yoshiko-pg/o3-search-mcp/badge" alt="o3-search MCP server" />
+			<a href="https://glama.ai/mcp/servers/@MocA-Love/gpt5-search-mcp.">
+  <img src="https://glama.ai/mcp/servers/@MocA-Love/gpt5-search-mcp./badge" alt="gpt5-search MCP server" />
 </a>
 		</td>
 	</tr>
@@ -30,14 +30,14 @@ OpenRouter経由でo3モデルとその強力なWeb検索機能を使えるよ�
 
 ### 🐛 デバッグで詰まった場合
 
-o3のWeb検索ではGitHubのissueやStack Overflowなど広範囲に問題を検索できるので、ニッチな問題も解決できる可能性が大幅に高まります。指示の例：
+GPT-5のWeb検索ではGitHubのissueやStack Overflowなど広範囲に問題を検索できるので、ニッチな問題も解決できる可能性が大幅に高まります。指示の例：
 
 ```
-> 起動したら以下のエラーが出ているので修正して。難しければo3に聞いてみて
+> 起動したら以下のエラーが出ているので修正して。難しければGPT-5に聞いてみて
 > [エラーメッセージを貼り付け]
 ```
 ```
-> WebSocketの接続がうまくいかない。デバッグして。わからなければo3に聞いてみて
+> WebSocketの接続がうまくいかない。デバッグして。わからなければGPT-5に聞いてみて
 ```
 
 ### 📚 最新のライブラリ情報を参照したい場合
@@ -45,11 +45,11 @@ o3のWeb検索ではGitHubのissueやStack Overflowなど広範囲に問題を�
 整ったドキュメントが存在しない場合でも強力なWeb検索から答えを得られます。指示の例：
 
 ```
-> このライブラリをv2にバージョンアップしたい。o3に聞きながら進めて
+> このライブラリをv2にバージョンアップしたい。GPT-5に聞きながら進めて
 ```
 
 ```
-> このライブラリのこのオプションが存在しないと言われた。なくなったのかも。代わりに何を指定すべきかo3に聞いて置き換えて
+> このライブラリのこのオプションが存在しないと言われた。なくなったのかも。代わりに何を指定すべきかGPT-5に聞いて置き換えて
 ```
 
 ### 🧩 複雑なタスクに取り組む場合
@@ -57,10 +57,10 @@ o3のWeb検索ではGitHubのissueやStack Overflowなど広範囲に問題を�
 検索だけでなく、設計の壁打ち相手になってもらうことも可能です。指示の例：
 
 ```
-> 同時編集可能なエディタを作成したいので設計して。o3にも設計レビューを依頼して、必要ならディスカッションして。
+> 同時編集可能なエディタを作成したいので設計して。GPT-5にも設計レビューを依頼して、必要ならディスカッションして。
 ```
 
-また、MCPサーバーとして提供されているため、こちらから指示しなくてもAIエージェントが自分で必要性を判断して自律的にo3に話しかけることもあります。自走する中での問題解決の幅が一気に広がるでしょう！
+また、MCPサーバーとして提供されているため、こちらから指示しなくてもAIエージェントが自分で必要性を判断して自律的にGPT-5に話しかけることもあります。自走する中での問題解決の幅が一気に広がるでしょう！
 
 ## インストール
 
@@ -69,14 +69,12 @@ o3のWeb検索ではGitHubのissueやStack Overflowなど広範囲に問題を�
 Claude Code:
 
 ```sh
-$ claude mcp add o3 \
+$ claude mcp add gpt5 \
 	-s user \  # この行を抜くと project scope でインストールされます
-	-e OPENROUTER_API_KEY=your-api-key \
-	-e SEARCH_CONTEXT_SIZE=medium \
+	-e OPENAI_API_KEY=your-api-key \
+	-e SEARCH_CONTEXT_SIZE=low \
 	-e REASONING_EFFORT=medium \
-	-e OPENROUTER_API_TIMEOUT=60000 \
-	-e OPENROUTER_MAX_RETRIES=3 \
-	-- npx o3-search-mcp
+	-- npx gpt5-search-mcp
 ```
 
 json:
@@ -84,18 +82,14 @@ json:
 ```jsonc
 {
   "mcpServers": {
-    "o3-search": {
+    "gpt5-search": {
       "command": "npx",
-      "args": ["o3-search-mcp"],
+      "args": ["gpt5-search-mcp"],
       "env": {
-        "OPENROUTER_API_KEY": "your-api-key",
-        // オプション: low, medium, high (デフォルト: medium)
-        "SEARCH_CONTEXT_SIZE": "medium",
-        "REASONING_EFFORT": "medium",
-        // オプション: ミリ秒単位のAPIタイムアウト (デフォルト: 60000)
-        "OPENROUTER_API_TIMEOUT": "60000",
-        // オプション: 最大リトライ回数 (デフォルト: 3)
-        "OPENROUTER_MAX_RETRIES": "3"
+        "OPENAI_API_KEY": "your-api-key",
+        // オプション: low, medium, high (デフォルト: low)
+        "SEARCH_CONTEXT_SIZE": "low",
+        "REASONING_EFFORT": "medium"
       }
     }
   }
@@ -107,8 +101,8 @@ json:
 コードをダウンロードしてローカルで実行したい場合：
 
 ```bash
-git clone git@github.com:yoshiko-pg/o3-search-mcp.git
-cd o3-search-mcp
+git clone git@github.com:MocA-Love/gpt5-search-mcp.git
+cd gpt5-search-mcp
 pnpm install
 pnpm build
 ```
@@ -116,14 +110,12 @@ pnpm build
 Claude Code:
 
 ```sh
-$ claude mcp add o3 \
+$ claude mcp add gpt5 \
 	-s user \  # この行を抜くと project scope でインストールされます
-	-e OPENROUTER_API_KEY=your-api-key \
-	-e SEARCH_CONTEXT_SIZE=medium \
+	-e OPENAI_API_KEY=your-api-key \
+	-e SEARCH_CONTEXT_SIZE=low \
 	-e REASONING_EFFORT=medium \
-	-e OPENROUTER_API_TIMEOUT=60000 \
-	-e OPENROUTER_MAX_RETRIES=3 \
-	-- node /path/to/o3-search-mcp/build/index.js
+	-- node /path/to/gpt5-search-mcp/build/index.js
 ```
 
 json:
@@ -131,18 +123,14 @@ json:
 ```jsonc
 {
   "mcpServers": {
-    "o3-search": {
+    "gpt5-search": {
       "command": "node",
-      "args": ["/path/to/o3-search-mcp/build/index.js"],
+      "args": ["/path/to/gpt5-search-mcp/build/index.js"],
       "env": {
-        "OPENROUTER_API_KEY": "your-api-key",
-        // オプション: low, medium, high (デフォルト: medium)
-        "SEARCH_CONTEXT_SIZE": "medium",
-        "REASONING_EFFORT": "medium",
-        // オプション: ミリ秒単位のAPIタイムアウト (デフォルト: 60000)
-        "OPENROUTER_API_TIMEOUT": "60000",
-        // オプション: 最大リトライ回数 (デフォルト: 3)
-        "OPENROUTER_MAX_RETRIES": "3"
+        "OPENAI_API_KEY": "your-api-key",
+        // オプション: low, medium, high (デフォルト: low)
+        "SEARCH_CONTEXT_SIZE": "low",
+        "REASONING_EFFORT": "medium"
       }
     }
   }
@@ -153,14 +141,12 @@ json:
 
 | 環境変数名 | オプション | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `OPENROUTER_API_KEY` | 必須 | - | OpenRouter API Key |
-| `OPENROUTER_MODEL` | 任意 | `deepseek/r1` | クエリに使用するモデル |
-| `OPENROUTER_BASE_URL` | 任意 | `https://openrouter.ai/api/v1` | OpenRouter APIベースURL |
-| `SEARCH_CONTEXT_SIZE` | 任意 | `medium` | 検索コンテキストサイズを制御<br>値: `low`, `medium`, `high` |
+| `OPENAI_API_KEY` | 必須 | - | OpenAI API Key |
+| `OPENAI_MODEL` | 任意 | `gpt-5-mini` | クエリに使用するモデル |
+| `OPENAI_BASE_URL` | 任意 | `https://api.openai.com/v1` | OpenAI APIベースURL |
+| `SEARCH_CONTEXT_SIZE` | 任意 | `low` | 検索コンテキストサイズを制御<br>値: `low`, `medium`, `high` |
 | `REASONING_EFFORT` | 任意 | `medium` | 推論努力レベルを制御<br>値: `low`, `medium`, `high` |
-| `OPENROUTER_API_TIMEOUT` | 任意 | `60000` | ミリ秒単位のAPIリクエストタイムアウト<br>例: `120000` で2分 |
-| `OPENROUTER_MAX_RETRIES` | 任意 | `3` | 失敗したリクエストの最大リトライ回数<br>SDKはレート制限（429）、サーバーエラー（5xx）、接続エラーで自動的にリトライします |
 
 ## 注意点
 
-このMCPサーバーはOpenRouterを使用してo3モデルにアクセスします。有効なOpenRouter APIキーと十分なクレジットがあることを確認してください。
+このMCPサーバーはOpenAIを使用してGPT-5モデルにアクセスします。有効なOpenAI APIキーと十分なクレジットがあることを確認してください。
