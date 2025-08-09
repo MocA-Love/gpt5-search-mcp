@@ -13,6 +13,8 @@ const server = new McpServer({
 // Configuration from environment variables
 const config = {
   apiKey: process.env.OPENAI_API_KEY,
+  model: process.env.OPENAI_MODEL || "gpt-5-mini",
+  baseURL: process.env.OPENAI_BASE_URL || "https://api.openai.com/v1",
   searchContextSize: (process.env.SEARCH_CONTEXT_SIZE || "low") as
     | "low"
     | "medium"
@@ -26,6 +28,7 @@ const config = {
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: config.apiKey,
+  baseURL: config.baseURL,
 });
 
 // Define the gpt5 tool
@@ -42,7 +45,7 @@ server.tool(
   async ({ input }) => {
     try {
       const response = await openai.responses.create({
-        model: "gpt-5-mini",
+        model: config.model,
         input: [
           {
             role: "user",
