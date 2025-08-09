@@ -1,31 +1,31 @@
 {
-  "name": "o3-search-mcp",
-  "description": "MCP server that enables AI agents to perform intelligent web searches using OpenAI's o3 model with natural language queries",
+  "name": "gpt5-search-mcp",
+  "description": "MCP server that enables AI agents to perform intelligent web searches using OpenAI's GPT-5 model with natural language queries",
   "version": "0.0.6",
   "main": "build/index.js",
   "bin": {
-    "o3-search-mcp": "./build/index.js"
+    "gpt5-search-mcp": "./build/index.js"
   },
   "files": [
     "build/"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yoshiko-pg/o3-search-mcp.git"
+    "url": "git+https://github.com/MocA-Love/gpt5-search-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/yoshiko-pg/o3-search-mcp/issues"
+    "url": "https://github.com/MocA-Love/gpt5-search-mcp/issues"
   },
-  "homepage": "https://github.com/yoshiko-pg/o3-search-mcp#readme",
+  "homepage": "https://github.com/MocA-Love/gpt5-search-mcp#readme",
   "keywords": [
     "mcp",
     "claude",
     "openai",
-    "o3",
+    "gpt5",
     "chatgpt",
     "llm"
   ],
-  "author": "@yoshiko-pg",
+  "author": "@MocA-Love",
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@10.10.0",
